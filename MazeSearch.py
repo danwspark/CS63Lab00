@@ -4,20 +4,22 @@
 # CS63: Artificial Intelligence, Lab 1
 # Spring 2016, Swarthmore College
 ########################################
-# full name: 
-# username: 
+# full name: WanSeo "Daniel" Park
+# username: wpark1
 ########################################
 
 from MazeClass import Maze
 from Queues import FIFO_Queue, LIFO_Queue, Random_Queue
 
 #TODO: add aditional Python library imports here
+import getopt
+import sys
 
 # Unicode characters used for displaying the SearchAgent
 EMPTY = u"\u25A1"; WALL = u"\u25A0"; UNKNOWN = " "; PATH = "*"
 UP = u"\u25B5"; DOWN = u"\u25BF"; LEFT = u"\u25C3"; RIGHT = u"\u25B9"
 
-def main():
+def main(bread):
     maze, mode = read_input()
     print "maze:"
     maze.display()
@@ -43,9 +45,29 @@ def read_input():
     Returns:
         maze: a Maze object initialized according to the input file
         mode: the search method to be used
-    """    
+    """
+    try:
+        opts, args = getopt.getopt(sys.argv[1:],"h", ["help"])
+
+    except getopt.GetoptError:
+        print "Error: Flag undefined.\nExiting.."######################
+        exit(1)
+
+    print opts
+    print args
+    try:
+        ofile = open(str(args[0]),"r")
+                
+    except IOError:
+        print "Error: File name is no good. Cannot open: "+ args[0]
+        print "Exiting..\n"########
+        exit(1)
+        
+            
+            
+        
     #TODO: implement this
-    raise NotImplementedError("TODO")
+    #raise NotImplementedError("TODO")
 
 
 class SearchAgent:
@@ -133,4 +155,4 @@ class SearchAgent:
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
