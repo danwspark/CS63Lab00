@@ -63,9 +63,12 @@ def read_input():
         print "Exiting..\n"########
         exit(1)
         
-            
-            
-        
+        """
+        https://docs.python.org/2/tutorial/errors.html
+        http://www.diveintopython.net/scripts_and_streams/command_line_arguments.html
+        http://www.tutorialspoint.com/python/python_command_line_arguments.htm
+        https://docs.python.org/2/library/getopt.html
+        """
     #TODO: implement this
     #raise NotImplementedError("TODO")
 
