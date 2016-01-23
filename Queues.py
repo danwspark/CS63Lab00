@@ -4,18 +4,52 @@
 # CS63: Artificial Intelligence, Lab 1
 # Spring 2016, Swarthmore College
 ########################################
-# full name: 
-# username: 
+# full name: WanSeo Park
+# username: wpark1
 ########################################
 
 #TODO: add Python library imports here
+from collections import deque
+from random import randrange
 
 def test_queues():
     #TODO: Test all three queue implementations.Try adding and removing 
     # several elements in various orders. Also test out printing,
     # containment testing with 'in', and len(). Think about edge-cases.
     # What should happen with an empty queue? What about duplicate entries?
-    raise NotImplementedError("TODO")
+
+    #raise NotImplementedError("TODO")
+    FIFO = FIFO_Queue()
+    FIFO.add(1)
+    FIFO.add(2)
+    print(str(len(FIFO))+" len of fifo")
+    print(str(FIFO.get())+": is first get")
+    print(str(len(FIFO))+" len of fifo")
+    print FIFO
+        
+    LIFO = LIFO_Queue()
+    LIFO.add(3)
+    LIFO.add(4)
+    LIFO.add(0)
+    print(str(len(LIFO))+ " Len of LIFO")
+    print(str(LIFO.get()) +": is first get LIFO")
+    print(str(len(LIFO))+ " Len of LIFO")
+    print LIFO
+    
+    Rand = Random_Queue()
+    Rand.add(5)
+    Rand.add(6)
+    Rand.add(7)
+    Rand.add(8)
+    print(str(len(Rand))+ " Len of Rand")
+    print(str(Rand.get()) +": is first get Rand")
+    print(str(len(Rand))+ " Len of Rand")
+    print Rand
+
+    
+    
+    print("ran")
+    
 
 
 class _Queue(object):
@@ -31,18 +65,20 @@ class _Queue(object):
     classes importantly differ in which item is returned by get().
     """
     def __init__(self):
+        self.contents = deque()
         #TODO: if all child classes use the same __init__(), implement it here
-        raise NotImplementedError("TODO???")
+        #raise NotImplementedError("TODO???")
 
     def add(self, item):
+        self.contents.append(item)
         """Stores item in the queue."""
         #TODO: if all child classes use the same add(), implement it here
-        raise NotImplementedError("TODO???")
+        #raise NotImplementedError("TODO???")
 
     def get(self):
         #TODO: if all child classes use the same get(), implement it here
         """Removes some item from the queue and returns it."""
-        raise NotImplementedError("TODO???")
+        #raise NotImplementedError("TODO???")
 
     def __len__(self):
         """ 'len(q)' calls this method.
@@ -72,20 +108,11 @@ class FIFO_Queue(_Queue):
     The first call to get() returns the item from the first call to add(),
     the second returns the second, and so on.
     """
-    def __init__(self):
-        #TODO: if _Queue implements __init__(), remove this definition
-        #otherwise, put your FIFO-specific implementation here
-        raise NotImplementedError("TODO???")
-
-    def add(self, item):
-        #TODO: if _Queue implements add(), remove this definition
-        #otherwise, put your FIFO-specific implementation here
-        raise NotImplementedError("TODO???")
-
     def get(self):
         #TODO: if _Queue implements get(), remove this definition
         #otherwise, put your FIFO-specific implementation here
-        raise NotImplementedError("TODO???")
+        return self.contents.popleft()
+        #raise NotImplementedError("TODO???")
 
 
 class LIFO_Queue(_Queue):
@@ -93,20 +120,11 @@ class LIFO_Queue(_Queue):
     The first call to get() returns the item from the most recent call to
     add(), the second returns the next-most-recent, and so on.
     """
-    def __init__(self):
-        #TODO: if _Queue implements __init__(), remove this definition
-        #otherwise, put your LIFO-specific implementation here
-        raise NotImplementedError("TODO???")
-
-    def add(self, item):
-        #TODO: if _Queue implements add(), remove this definition
-        #otherwise, put your LIFO-specific implementation here
-        raise NotImplementedError("TODO???")
-
     def get(self):
         #TODO: if _Queue implements get(), remove this definition
         #otherwise, put your LIFO-specific implementation here
-        raise NotImplementedError("TODO???")
+        return self.contents.pop()
+        #raise NotImplementedError("TODO???")
 
 
 class Random_Queue(_Queue):
@@ -115,19 +133,25 @@ class Random_Queue(_Queue):
     at random.
     """
     def __init__(self):
+        self.contents = []
         #TODO: if _Queue implements __init__(), remove this definition
         #otherwise, put your Random-specific implementation here
-        raise NotImplementedError("TODO???")
+        
+        #raise NotImplementedError("TODO???")
 
+        """
     def add(self, item):
         #TODO: if _Queue implements add(), remove this definition
         #otherwise, put your Random-specific implementation here
         raise NotImplementedError("TODO???")
+        """
 
     def get(self):
         #TODO: if _Queue implements get(), remove this definition
         #otherwise, put your Random-specific implementation here
-        raise NotImplementedError("TODO???")
+        return self.contents.pop(randrange(len(self.contents)))
+        
+       # raise NotImplementedError("TODO???")
 
 
 if __name__ == "__main__":
