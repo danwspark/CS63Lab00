@@ -19,37 +19,58 @@ def test_queues():
     # What should happen with an empty queue? What about duplicate entries?
 
     #raise NotImplementedError("TODO")
+    print "\nFIFO Start"
     FIFO = FIFO_Queue()
     FIFO.add(1)
     FIFO.add(2)
+    FIFO.add(4)
+    FIFO.add(5)
+    print FIFO
+    print "1 in FIFO:"+ str(1 in FIFO)
+    print "3 in FIFO:"+str(3 in FIFO)
     print(str(len(FIFO))+" len of fifo")
     print(str(FIFO.get())+": is first get")
+    print(str(FIFO.get())+": is second get")
+    print "1 in FIFO:"+ str(1 in FIFO)
     print(str(len(FIFO))+" len of fifo")
     print FIFO
+    print "\nLIFO Start"
         
     LIFO = LIFO_Queue()
     LIFO.add(3)
     LIFO.add(4)
-    LIFO.add(0)
+    LIFO.add(5)
+    LIFO.add(6)
+    print LIFO
+    print "1 in LIFO:"+ str(1 in LIFO)
+    print "5 in LIFO:"+ str(5 in LIFO)
     print(str(len(LIFO))+ " Len of LIFO")
     print(str(LIFO.get()) +": is first get LIFO")
+    print(str(LIFO.get()) +": is second get LIFO")
+    print "5 in LIFO:"+ str(5 in LIFO)
     print(str(len(LIFO))+ " Len of LIFO")
     print LIFO
+    print "\nRand Start"
     
     Rand = Random_Queue()
     Rand.add(5)
     Rand.add(6)
     Rand.add(7)
     Rand.add(8)
+    print Rand
+    print "1 in Rand:"+ str(1 in Rand)
+    print "5 in Rand:"+ str(5 in Rand)
     print(str(len(Rand))+ " Len of Rand")
     print(str(Rand.get()) +": is first get Rand")
+    print "5 in Rand:"+ str(5 in Rand)
+    print "6 in Rand:"+ str(6 in Rand)
+    print(str(Rand.get()) +": is second get Rand")
     print(str(len(Rand))+ " Len of Rand")
     print Rand
+    print "\n"
 
-    
-    
     print("ran")
-    
+    return 0
 
 
 class _Queue(object):
