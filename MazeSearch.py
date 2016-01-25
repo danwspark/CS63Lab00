@@ -75,11 +75,12 @@ def read_input():
     rl = ofile.readline()
     walls = []
     while rl != '':
-        walls.append(rl.strip().split())
+        temp = rl.strip().split()
+        walls.append((int(temp[0]),int(temp[1]))) #Talk about ugly...
         rl= ofile.readline()
 
-    print row
-    print col
+    maze = Maze(row,col,walls)
+    return maze, args[1]
 
 
 
