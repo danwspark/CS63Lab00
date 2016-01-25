@@ -53,14 +53,15 @@ def read_input():
         print "Error: Flag undefined.\nExiting.."######################
         exit(1)
 
-    print opts
-    print args
+    if len(sys.argv) != 3:
+        print "Error: Incorrect number of inputs"
+        exit(1)
     try:
         ofile = open(str(args[0]),"r")
                 
     except IOError:
         print "Error: File name is no good. Cannot open: "+ args[0]
-        print "Exiting..\n"########
+        print "Exiting..\n"
         exit(1)
         
         """
@@ -69,6 +70,19 @@ def read_input():
         http://www.tutorialspoint.com/python/python_command_line_arguments.htm
         https://docs.python.org/2/library/getopt.html
         """
+    row = int(ofile.readline().strip())
+    col = int(ofile.readline().strip())
+    rl = ofile.readline()
+    walls = []
+    while rl != '':
+        walls.append(rl.strip().split())
+        rl= ofile.readline()
+
+    print row
+    print col
+
+
+
     #TODO: implement this
     #raise NotImplementedError("TODO")
 
