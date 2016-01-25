@@ -104,10 +104,25 @@ class SearchAgent:
             maze: a MazeClass.Maze instance
             mode: one of "BFS", "DFS", or "RND"
         """
+        free = {}
+        parents = {}
+        walls = {}
+
+        if mode == "DFS":
+            frontier = LIFO_Queue()
+            print "DFS Created"
+
+        elif mode == "BFS":
+            frontier = FIFO_Queue()
+            print "BFS Created"
+
+        elif mode == "RND":
+            frontier = Random_Queue()
+            print "RND Created!"
+
         #TODO: store the maze
         #TODO: initialize self.walls, self.parents, and self.free
         #TODO: initialize the frontier according to 'mode'
-        raise NotImplementedError("TODO")
 
     def search(self):
         """Searches from start until it reaches goal or proves that it can't.
