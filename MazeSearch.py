@@ -54,7 +54,7 @@ def read_input():
         exit(1)
 
     if len(sys.argv) != 3:
-        print "Error: Incorrect number of inputs"
+        print "Error: Incorrect number of inputs. \nExiting.."
         exit(1)
     try:
         ofile = open(str(args[0]),"r")
@@ -80,6 +80,10 @@ def read_input():
         rl= ofile.readline()
 
     maze = Maze(row,col,walls)
+
+    if args[1] not in ['BFS', 'DFS', 'RND']:
+        print "Error: Search Mode not recognized. \nExiting.."
+        exit(1)
     return maze, args[1]
 
 
