@@ -4,8 +4,9 @@
 ########################################
 
 # Unicode characters used for displaying the Maze
-EMPTY = u"\u25A1"; WALL = u"\u25A0"
 
+#EMPTY = u"\u25A1"; WALL = u"\u25A0"
+EMPTY = u'O'; WALL = u"X"
 class Maze:
     """Represents the state space of a maze search problem."""    
     def __init__(self, rows, cols, walls):
