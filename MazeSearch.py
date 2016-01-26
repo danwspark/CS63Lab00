@@ -104,21 +104,21 @@ class SearchAgent:
             maze: a MazeClass.Maze instance
             mode: one of "BFS", "DFS", or "RND"
         """
-        free = {}
-        parents = {}
-        walls = {}
+        self.mz = maze
+        self.free = {}
+        self.parents = {}
+        self.walls = {}
+        self.start = maze.start
+        self.end = maze.goal
 
         if mode == "DFS":
-            frontier = LIFO_Queue()
-            print "DFS Created"
+            self.frontier = LIFO_Queue()
 
         elif mode == "BFS":
-            frontier = FIFO_Queue()
-            print "BFS Created"
+            self.frontier = FIFO_Queue()
 
         elif mode == "RND":
-            frontier = Random_Queue()
-            print "RND Created!"
+            self.frontier = Random_Queue()
 
         #TODO: store the maze
         #TODO: initialize self.walls, self.parents, and self.free
@@ -132,9 +132,27 @@ class SearchAgent:
         visited in which order.
         search() takes no inputs and has no return value.
         """
-        #TODO: implement this
-        raise NotImplementedError("TODO")
+        self.frontier.add(self.start)
+        self.parents[self.start] = None
 
+        while len(self.frontier) != 0:
+            curr = self.frontier.get()
+            if self.mz.is_wall(curr):
+                self.walls[curr] = None
+
+            else:
+                self.free[curr] = None
+                if curr == self.end:
+                    print "done?"
+                    return
+
+                for i in self.mz.neighbors(curr):
+                    if i not in self.parents:
+                        self.parents[i] = curr
+                        self.frontier.add(i)
+
+        print "done?"
+        
     def path_to(self, state):
         """Returns a list of (row, col) pairs along a path from start-->state.
         Should only be called after search(). If state has not been reached,
