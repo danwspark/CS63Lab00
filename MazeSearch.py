@@ -16,8 +16,10 @@ import getopt
 import sys
 
 # Unicode characters used for displaying the SearchAgent
-EMPTY = u"\u25A1"; WALL = u"\u25A0"; UNKNOWN = " "; PATH = "*"
-UP = u"\u25B5"; DOWN = u"\u25BF"; LEFT = u"\u25C3"; RIGHT = u"\u25B9"
+#EMPTY = u"\u25A1"; WALL = u"\u25A0"; UNKNOWN = " "; PATH = "*"
+EMPTY = "E"; WALL = "W"; UNKNOWN = " "; PATH = "*"
+#UP = u"\u25B5"; DOWN = u"\u25BF"; LEFT = u"\u25C3"; RIGHT = u"\u25B9"
+UP = "U"; DOWN = "D" ; LEFT = "L"; RIGHT = "R"
 
 def main(bread):
     maze, mode = read_input()
@@ -136,38 +138,48 @@ class SearchAgent:
         self.parents[self.start] = None
 
         while len(self.frontier) != 0:
-            curr = self.frontier.get()
-            if self.mz.is_wall(curr):
-                self.walls[curr] = None
+            self.curr = self.frontier.get()
+            if self.mz.is_wall(self.curr):
+                self.walls[self.curr] = None
 
             else:
-                self.free[curr] = None
-                if curr == self.end:
-                    print "done? Found goal"
+                self.free[self.curr] = None
+                if self.curr == self.end:
+                    print "done? Found goal"##################
                     return
 
-                for i in self.mz.neighbors(curr):
+                for i in self.mz.neighbors(self.curr):
                     if i not in self.parents:
-                        self.parents[i] = curr
+                        self.parents[i] = self.curr
                         self.frontier.add(i)
 
-        print "done? no soln found"
+        print "done? no soln found"###############
 
     def path_to(self, state):
         """Returns a list of (row, col) pairs along a path from start-->state.
         Should only be called after search(). If state has not been reached,
         an empty list is returned.
         """
-        #TODO: implement this
-        raise NotImplementedError("TODO")
+        ret = []
+        if self.curr != self.end:
+            print "Path to: no soln returns empty list"##########
+            return ret
+
+        self.trace = self.curr
+        while self.trace!= self.start:
+            ret.append(self.trace)
+            self.trace= self.parents[self.trace]
+        ret.append(self.trace)            
+        return ret
+
 
     def display_path(self):
         """Prints the maze with a path from start-->goal if one was found.
         Should only be called after search()."""
         rep = u""
-        path = self.path_to(self.maze.goal)
-        for r in range(self.maze.rows):
-            for c in range(self.maze.cols):
+        path = self.path_to(self.mz.goal)
+        for r in range(self.mz.rows):
+            for c in range(self.mz.cols):
                 rep += self._path_char((r,c), path) + " "
             rep += "\n"
         print rep
@@ -176,7 +188,7 @@ class SearchAgent:
         """Helper function for display_path()."""
         if state in path:
             return PATH
-        return self.maze._display_char(*state)
+        return self.mz._display_char(self.curr)
         
     def display_parents(self):
         """Prints a representation of the agent's knowledge of the maze.
@@ -184,15 +196,15 @@ class SearchAgent:
         an arrow pointing in the direction of their parent. Unvisited cells
         are displayed as blanks."""
         rep = u""
-        for r in range(self.maze.rows):
-            for c in range(self.maze.cols):
+        for r in range(self.mz.rows):
+            for c in range(self.mz.cols):
                 rep += self._parent_char((r,c)) + " "
             rep += "\n"
         print rep
 
     def _parent_char(self, state):
         """Helper function for display_parents()."""
-        if state == self.maze.start:
+        if state == self.mz.start:
             return EMPTY
         if state in self.walls:
             return WALL
