@@ -143,7 +143,7 @@ class SearchAgent:
             else:
                 self.free[curr] = None
                 if curr == self.end:
-                    print "done?"
+                    print "done? Found goal"
                     return
 
                 for i in self.mz.neighbors(curr):
@@ -151,8 +151,8 @@ class SearchAgent:
                         self.parents[i] = curr
                         self.frontier.add(i)
 
-        print "done?"
-        
+        print "done? no soln found"
+
     def path_to(self, state):
         """Returns a list of (row, col) pairs along a path from start-->state.
         Should only be called after search(). If state has not been reached,
