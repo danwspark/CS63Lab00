@@ -56,7 +56,9 @@ def read_input():
         exit(1)
 
     if len(sys.argv) != 3:
-        print "Error: Incorrect number of inputs. \nExiting.."
+        print "Error: Incorrect number of inputs. \
+                \nusage: ./MazeSearch.py maze_file.txt {BFS,DFS,RND} \
+                \nExiting.."
         exit(1)
     try:
         ofile = open(str(args[0]),"r")
@@ -66,12 +68,6 @@ def read_input():
         print "Exiting..\n"
         exit(1)
         
-        """
-        https://docs.python.org/2/tutorial/errors.html
-        http://www.diveintopython.net/scripts_and_streams/command_line_arguments.html
-        http://www.tutorialspoint.com/python/python_command_line_arguments.htm
-        https://docs.python.org/2/library/getopt.html
-        """
     row = int(ofile.readline().strip())
     col = int(ofile.readline().strip())
     rl = ofile.readline()
@@ -84,14 +80,11 @@ def read_input():
     maze = Maze(row,col,walls)
 
     if args[1] not in ['BFS', 'DFS', 'RND']:
-        print "Error: Search Mode not recognized. \nExiting.."
+        print "Error: Search Mode not recognized.\
+         \nusage: .MazeSearch.py maze_file.txt {BFS,DFS,RND} \
+            \nExiting.."
         exit(1)
     return maze, args[1]
-
-
-
-    #TODO: implement this
-    #raise NotImplementedError("TODO")
 
 
 class SearchAgent:
@@ -106,7 +99,7 @@ class SearchAgent:
             maze: a MazeClass.Maze instance
             mode: one of "BFS", "DFS", or "RND"
         """
-        self.mz = maze
+        self.mz = maze #just made a new, shorter name. 
         self.free = {}
         self.parents = {}
         self.walls = {}
@@ -122,10 +115,6 @@ class SearchAgent:
         elif mode == "RND":
             self.frontier = Random_Queue()
 
-        #TODO: store the maze
-        #TODO: initialize self.walls, self.parents, and self.free
-        #TODO: initialize the frontier according to 'mode'
-
     def search(self):
         """Searches from start until it reaches goal or proves that it can't.
         On return, all visited states will appear in self.walls or self.free,
@@ -134,6 +123,7 @@ class SearchAgent:
         visited in which order.
         search() takes no inputs and has no return value.
         """
+        #thank you for the pseudocode!
         self.frontier.add(self.start)
         self.parents[self.start] = None
 
@@ -145,7 +135,6 @@ class SearchAgent:
             else:
                 self.free[self.curr] = None
                 if self.curr == self.end:
-                    print "done? Found goal"##################
                     return
 
                 for i in self.mz.neighbors(self.curr):
@@ -153,7 +142,6 @@ class SearchAgent:
                         self.parents[i] = self.curr
                         self.frontier.add(i)
 
-        print "done? no soln found"###############
 
     def path_to(self, state):
         """Returns a list of (row, col) pairs along a path from start-->state.
@@ -162,9 +150,9 @@ class SearchAgent:
         """
         ret = []
         if self.curr != self.end:
-            print "Path to: no soln returns empty list"##########
             return ret
 
+        #follows trace from end to start, bc curr is at the end
         self.trace = self.curr
         while self.trace!= self.start:
             ret.append(self.trace)

@@ -12,13 +12,18 @@
 from collections import deque
 from random import randrange
 
+"""
+    This implementation uses a data structure called deque included in python library
+    Allows O(1) access of elements at the front and the back.
+"""
+
 def test_queues():
     #TODO: Test all three queue implementations.Try adding and removing 
     # several elements in various orders. Also test out printing,
     # containment testing with 'in', and len(). Think about edge-cases.
     # What should happen with an empty queue? What about duplicate entries?
 
-    #raise NotImplementedError("TODO")
+    #Tested all major functions. work as advertised
     print "\nFIFO Start"
     FIFO = FIFO_Queue()
     FIFO.add(1)
@@ -160,12 +165,6 @@ class Random_Queue(_Queue):
         
         #raise NotImplementedError("TODO???")
 
-        """
-    def add(self, item):
-        #TODO: if _Queue implements add(), remove this definition
-        #otherwise, put your Random-specific implementation here
-        raise NotImplementedError("TODO???")
-        """
 
     def get(self):
         #TODO: if _Queue implements get(), remove this definition
